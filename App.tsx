@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from "react";
+import { AuthProvider, AuthContext } from "./src/contexts/authContext";
+import AppNavigator from "./src/navigation/appNavigator";
+
+const AppContent = () => {
+  const {user } = useContext(AuthContext);
+
+  return <AppNavigator isLoggedIn={user ? user.isLoggedIn : false} />;
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
